@@ -13,11 +13,16 @@
 # the number and % of samples above the standard per state then use a graph to 
 # compare results
 
+#-------------------------------------------------------------------------------------
+
 # import pandas to organize the dataset
 import pandas as pd
 
 # import matplot to create graphs
 import matplotlib.pyplot as plt
+
+# Import ci-square test from SciPy
+from scipy.stats import chi2_contingency
 
 # Load the USGS groundwater dataset and skip the introduction
 df=pd.read_csv(
@@ -30,7 +35,10 @@ print (df. head())
 print (df.columns)
 print()
 
-# Step 1: Indentify samples that exceed the standard
+# Print the question: 
+print ("How do arsenic concentrations in groundwater in different states compare to the EPA's drinking water standard?")
+
+# Step 1: Indentify samples that exceed the standard-------------------------------
 
 # Define the EPA standard in micrograms per liter
 epa_limit = 10
@@ -43,7 +51,7 @@ print ("Total Groundwater Samples:", len(df))
 print ("Samples Above the EPA Limit:", len(above_limit))
 print()
 
-# Step 2 : Compare arsenic concentrations between states
+# Step 2 : Compare arsenic concentrations between states------------------------------
 
 # Create a neww column that shows whether a sample exceeds the limit
 # True = Sample exceeds the limit / False = Sample does not exceed the limit
@@ -78,7 +86,7 @@ print("Arsenic Concentration by State:")
 print(state_results)
 print()
 
-#Step 3:
+#Step 3: Graph the data -------------------------------------------------------------------
 
 # Select top 10 states with highest percentage of samples that
 # exceed the EPA drinking water standard
@@ -107,7 +115,7 @@ plt.savefig("arsenic_state_graph.png", dpi=300)
 # Display the graph
 plt.show()
 
-# Step 4: Check measurements
+# Step 4: Check measurements-------------------------------------------------------------------
 
 # Count measurement remarks in dataset
 # This helps determine how arsenic values were reported
@@ -135,7 +143,7 @@ print()
 print(dash_samples[["STATE","AS_RMRK", "AS_CONC"]].head(10))
 print()
 
-# Step 5: Summarize Results
+# Step 5: Summarize Results-----------------------------------------------------------------
 
 # Display the 10 states with the highest percentages
 print("Top 10 States by % that Exceed the EPA Limit")
@@ -150,6 +158,41 @@ print("Overall Results:")
 print("Total Samples:", len(df))
 print("Samples Above the EPA Limit:", len(above_limit))
 print("Percentage Above the EPA Limit:", round(overall_percent, 2), "%")
+print()
 
 # Save the state results for report
 state_results.to_csv("arsenic_state_results.csv")
+
+# Step 6: Perform a chi-square test-------------------------------------------------------------------
+
+# Develop a table that shows how many samples are in each state are and are not above the standard
+contingency_table = pd.crosstab(
+    df["STATE"],
+    df["Above_EPA_Limit"]
+)
+
+# Use a chi-square test to check whether arsenic levels exceeding the EPA standard vary between states
+chi2, p_value, degrees_freedom, expected = chi2_contingency(
+    contingency_table
+)
+
+# Display Results
+print ("Chi-Square Test Results:")
+print ("Statistic:", round(chi2,2))
+print("P-Value:", p_value)
+print("Degrees of Freedom:", degrees_freedom)
+print()
+
+# Check whether the expected counts are high enough for the test to be reliable
+print ("Expected Counts Less than 5:", (expected<5).sum())
+print()
+
+# Use a significance level of 0.05
+if p_value<0.05:
+    print("Reject the null hypothesis")
+    print("There is a statistically significant assosciation between  state and EPA exceedance status")
+else:
+    print("Fail to reject the null hypothesis")
+    print("There is not enough significant evidence of an association between state and EPA exceedance status")
+
+print()
