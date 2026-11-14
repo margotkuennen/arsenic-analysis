@@ -158,3 +158,8 @@ ax.set_xlim(-180, -60)
 ax.set_ylim(15, 72)
 
 plt.show()
+plt.savefig(
+    r"C:\ENGR 315\arsenic-analysis\arsenic_region_map.png",
+    dpi=300,
+    bbox_inches="tight"
+)
