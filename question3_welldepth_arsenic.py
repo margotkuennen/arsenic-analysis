@@ -115,3 +115,6 @@ plt.legend()
 plt.tight_layout()
 
 plt.savefig("arsenic_well_depth_scatter.png", dpi=300)
+
+# show finished plot
+plt.show()
