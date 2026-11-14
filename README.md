@@ -54,8 +54,7 @@ Using Python, we will perform linear regression. This will allow us to observe w
 
 ## Results (Answers to the Questions): 
 
-### Question 1: How do arsenic concentrations in groundwater differ in urban and rural regions, 
-# and how do these patterns relate to population density?
+### Question 1: How do arsenic concentrations in groundwater differ in urban and rural regions, and how do these patterns relate to population density?
 With the data samples sorted, we calculated metrics including mean, standard deviation, and number of samples using Pandas and NumPy. A two-sided T-test was used to determine whether there is a significant difference in mean arsenic concentrations in urban versus rural areas. Additionally, a plot was created for visual comparison.
 
  ### Overall Results
