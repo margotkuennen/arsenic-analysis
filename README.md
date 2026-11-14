@@ -54,8 +54,46 @@ Using Python, we will perform linear regression. This will allow us to observe w
 
 ## Results (Answers to the Questions): 
 
+### Question 1: How do arsenic concentrations in groundwater differ in urban and rural regions, 
+# and how do these patterns relate to population density?
+With the data samples sorted, we calculated metrics including mean, standard deviation, and number of samples using Pandas and NumPy. A two-sided T-test was used to determine whether there is a significant difference in mean arsenic concentrations in urban versus rural areas. Additionally, a plot was created for visual comparison.
+
+ ### Overall Results
+
+### Arsenic Concentration Statistics by Region
+
+| Region | Sample Count | Mean (µg/L) | Median (µg/L) | Std Dev (µg/L) |
+|:---|---:|---:|---:|---:|
+| Rural | 15,481 | 8.18 | 1.00 | 53.80 |
+| Urban | 4,562 | 4.67 | 1.00 | 18.82 |
+
+### Two-Sided T-Test
+
+| Metric | Result |
+|:---|---:|
+| T-statistic | -6.8076 |
+| P-value | 1.021 × 10⁻¹¹ |
+| Significance Level (α) | 0.05 |
+| Decision | Reject the Null Hypothesis |
+
+### Urban and Rural Groundwater Sample Locations
+
+![Figure 1. Map showing the locations of urban and rural groundwater arsenic samples.](arsenic_region_map.png)
+
+**Figure 1.** Map showing the locations of urban and rural groundwater arsenic samples. Urban samples are shown in blue, and rural samples are shown in orange.
+
+### Interpretation
+In rejecting the null hypothesis, the urban versus rural sample classifications showed a statistically significant difference in mean arsenic concentrations. 
+
+### Data Limitations
+It is important to consider several limitations within this analysis. The U.S. Census data was collected in the year 2000, while the arsenic concentrations in groundwater data was collected from 1970 - 2001. Additionally, the U.S. Census data only provided information defining urban regions, therefore areas outside of the urban boundaries were assumed to be rural. 
+
+
+
+
+
 ### Question 2: How do arsenic concentrations in groundwater in different states compare to the EPA's drinking water Standard
-We used python to analyze the USGS dataset. Using Pandas, we compared the concentrations in each state to the EPA drinking water standard of 10 micrograms per liter. Wecalculated the number of samples, the number and percent that exceeds the limit, and the abverage arsenic concentration per state
+We used python to analyze the USGS dataset. Using Pandas, we compared the concentrations in each state to the EPA drinking water standard of 10 micrograms per liter. Wecalculated the number of samples, the number and percent that exceeds the limit, and the abverage arsenic concentration per state.
  ### Overall Results
 
  - **Total Groundwater Samples:** 20,043
@@ -63,7 +101,7 @@ We used python to analyze the USGS dataset. Using Pandas, we compared the concen
  - **Percenrage abive the EPA Standard:** 11.23%
 
  ### State Comparison
- Nevada had the highest percentage of samples above the limit at **41.71%**, followed by Arizona at **29.31%**, and North Dakota at **29.07%**.This shows that arsenic concentrations vary between states in the dataset
+ Nevada had the highest percentage of samples above the limit at **41.71%**, followed by Arizona at **29.31%**, and North Dakota at **29.07%**.This shows that arsenic concentrations vary between states in the dataset.
 
  **Figure 1: Percentage of Groundwater Samples above the EPA Drinking water Standard by State**
 ![Arsenic Concentrations by State](arsenic_state_graph.png)
@@ -83,8 +121,48 @@ We used python to analyze the USGS dataset. Using Pandas, we compared the concen
  ### Data Limitations
  The dataset has measurements that were below the laboratory detection limit. Saples with arsenic concentrations above the EPA standard had a "-" measurement remark.These results are understood as preliminary until tht remarks are fully understood.
 
+### Question 3:
+A linear regression was performed,followed by a scatterplot. Data was separated into East and West regions to further compare the regression results for each one.
+ ### Overall Results
+ Full Dataset Linear Regression:
+| Metric | Result |
+|:---|---:|
+| Slope | -0.001445 |
+| Intercept | 7.8636 |
+| Correlation Coefficient (r) | -0.011867 |
+| R-squared | 0.000141 |
+
+Regional Sample Counts
+
+| Region | Sample Count |
+|:---|---:|
+| West | 8,218 |
+| East | 7,647 |
+
+West Region Linear Regression
+
+| Metric | Result |
+|:---|---:|
+| Slope | -0.004389 |
+| Intercept | 13.106 |
+| R-squared | 0.000838 |
+
+East Region Linear Regression
+
+| Metric | Result |
+|:---|---:|
+| Slope | -0.000229 |
+| Intercept | 2.9496 |
+| R-squared | 0.000050 |
+
+ ### Data Limitations
+159 measurements were reported below the detection limits, and therefore these samples had a "-" measurement remark. 
+
 
 ## Conclusions:
+
+### Question 1:
+Based on the results from Question 1, it can be concluded that there is a significant difference between the arsenic concentration levels in urban areas and rural areas. With a mean concentration of 8.18 ug/L for rural areas and a mean concentration of 4.67 ug/L in urban areas, a trend emerged from the dataset. This supports the idea that rural areas in the United States generally have higher arsenic concentrations in groundwater, however, the generated plot also highlights the difference in number of samples for urban and rural areas. 
 
 ### Question 2: 
 Our Python analysis shows that arsenic concentrations vary throughout each state, Nevada had the largest percent of samples that exceeded the EPA's drinking water standard at 48.71%, Arizona had 29.31%, and North Dakota had 29.07%. The P-value was nearly 0, suggesting that there is a statistical association between state and exceedance of the EPA standard. 
@@ -92,7 +170,6 @@ Our Python analysis shows that arsenic concentrations vary throughout each state
 ### Question 3
 This question was used to gather data such as, total groundwater samples which came to be 20043 with 15865 of those samples having complete well depth and concentration data. Samples reported below the detection limit were 6031 and 9834 for above or at the limit. 
 
-**Limitations:** 159 measurements were reported below the detection limits, and therefore these samples had a "-" measurement remark. 
 **Overall Conclusion:** Our findings indicate that groundwater exceedance percentages vary accross states. 
 
 ## Actions that need to be completed:
