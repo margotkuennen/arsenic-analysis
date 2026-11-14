@@ -89,6 +89,9 @@ We used python to analyze the USGS dataset. Using Pandas, we compared the concen
 ### Question 2: 
 Our Python analysis shows that arsenic concentrations vary throughout each state, Nevada had the largest percent of samples that exceeded the EPA's drinking water standard at 48.71%, Arizona had 29.31%, and North Dakota had 29.07%. The P-value was nearly 0, suggesting that there is a statistical association between state and exceedance of the EPA standard. 
 
+### Question 3
+This question was used to gather data such as, total groundwater samples which came to be 20043 with 15865 of those samples having complete well depth and concentration data. Samples reported below the detection limit were 6031 and 9834 for above or at the limit. 
+
 **Limitations:** 159 measurements were reported below the detection limits, and therefore these samples had a "-" measurement remark. 
 **Overall Conclusion:** Our findings indicate that groundwater exceedance percentages vary accross states. 
 
